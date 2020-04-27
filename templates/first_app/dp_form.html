@@ -1,0 +1,46 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Deposit Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dp_form.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="container">
+    <form id="dp_form" action="" method="post">
+      {% csrf_token %}
+      <h3>Deposit Form</h3>
+      <fieldset class="fieldset">
+        <input placeholder="Name and surname" name="name" type="text" tabindex="1" required autofocus>
+      </fieldset>
+      <fieldset class="fieldset">
+        <input placeholder="Username" name="username" type="text" tabindex="2" required>
+      </fieldset>
+      <fieldset class="fieldset">
+        <select type="sl_bank" name="bank_name" id="">
+            <option value="">Select a Bank</option>
+            <option value="Banca Transilvania">Banca Transilvania</option>
+            <option value="Bancpost">Bancpost</option>
+            <option value="BCR">BCR</option>
+            <option value="BRD">BRD</option>
+            <option value="CEC Bank">CEC Bank</option>
+            <option value="Credit Europe Bank">Credit Europe Bank</option>
+            <option value="First Bank">First Bank</option>
+            <option value="Garanti">Garanti</option>
+            <option value="ING">ING</option>
+            <option value="UniCredit Bank">UniCredit Bank</option>
+            <option value="Raiffeisen Bank">Raiffeisen Bank</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <button name="submit" type="submit" id="dp_form-submit" data-submit="...Sending">Submit</button>
+      </fieldset>
+    </form>
+  </div>
+</body>
+</html>

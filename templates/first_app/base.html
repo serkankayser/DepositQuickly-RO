@@ -1,0 +1,43 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quick Withdraw</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+  <body>
+    <header>
+        <nav class="navBarTop">
+            <div><a href="{% url 'home_pg' %}">Quick Withdraw</a></div>
+            {% if user.is_authenticated %}
+            <div>
+              <img src="{% static 'images/profilPhoto.png' %}">
+              <p>{{ user.username }}&emsp;</p>
+            <div>
+              <a href="{% url 'logout' %}" style="color:yellow;"><i class="fa fa-sign-out"></i> Sign Out</a>
+            </div>
+            </div>
+            {% endif %}
+        </nav>
+
+        <nav class="navBarLeft">
+            <p><a href="#"><i class="fa fa-bars"></i> Menu</a></p>
+            <ul>
+                <li><a href="{% url 'summary_pg' %}"><i class="fa fa-dashboard"></i> Summary</a></li>
+                <li><a href="{% url 'wd_list' %}"><i class="fa fa-share-alt"></i> Withdraw List</a></li>
+                <li><a href="{% url 'dp_list' %}"><i class="fa fa-share-square"></i> Deposit List</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+      {% block content %}
+      {% endblock %}
+    </section>
+
+  </body>
+</html>

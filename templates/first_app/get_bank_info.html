@@ -1,0 +1,30 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Deposit Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dp_form.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+    <body>
+      <div class="container">
+        <form id="dp_form" action="" method="post">
+          {% csrf_token %}
+          <h3> Send Money </h3>
+          <h4>Please send the money to the account below and then press the 'Done' button.</h4>
+          <h4>--------------------------------------------------------------------------------------------------------</h4>
+            {% if Witdrawal_Form and Deposit_Form %}
+              <h4>Name Surname: {{ Witdrawal_Form.name }}</h4>
+              <h4>Bank Name: {{ Witdrawal_Form.bank_name }}</h4>
+              <h4>IBAN: {{ Witdrawal_Form.iban }}</h4>
+              <h4>Amount: {{ Witdrawal_Form.amount }}</h4>
+              <button class="button" value="Done" name="done" type="submit" method="post"> Done </button>
+            {% endif %}
+        </form>
+      </div>
+    </body>
+</html>

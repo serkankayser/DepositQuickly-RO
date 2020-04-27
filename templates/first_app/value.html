@@ -1,0 +1,28 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Deposit Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dp_form.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+    <body>
+      <div class="container">
+        <form id="dp_form" action="" method="post">
+          {% csrf_token %}
+          <h3> Select a value </h3>
+            {% if Witdrawal_Form and Deposit_Form %}
+                {% for cek in Witdrawal_Form %}
+                    {% if cek.status == "Pending" and cek.bank_name == Deposit_Form.bank_name %}
+                        <button class="button" value="{{ cek.id }}" name="btn_cek" type="submit" method="post"> {{ cek.amount }} </button>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </form>
+      </div>
+    </body>
+</html>

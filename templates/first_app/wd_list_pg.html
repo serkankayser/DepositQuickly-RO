@@ -1,0 +1,144 @@
+{% extends 'first_app/base.html' %}
+
+{% block content %}
+
+<section class="content">
+    <h2>WITHDRAW LIST</h2>
+    <div class="divSearch">
+        <div class="divSearch1-1">
+            <h3><i class="fa fa-search"></i> Search</h3>
+            <p><i class="fa fa-info"></i> Total Withdraw
+              <span class="total">
+                0
+              </span></p>
+        </div>
+        <form class="divSearch1-2" action="{% url 'search_wd' %}" method="get">
+            <div class="search1">
+                <label for="">Search:</label>
+                <input type="text" placeholder="Search" name="q">
+            </div>
+            <div class="search2">
+                <label for="">Date:</label>
+                    <div class="searchDate">
+                    <input type="date" value="" name="" id="">
+                    <input type="date" name="" id="">
+                </div>
+            </div>
+            <div class="search3">
+                <label for="">Bank:</label>
+                <select name="a" id="">
+                    <option value="">Select a Bank</option>
+                    <option value="Banca Transilvania">Banca Transilvania</option>
+                    <option value="Bancpost">Bancpost</option>
+                    <option value="BCR">BCR</option>
+                    <option value="BRD">BRD</option>
+                    <option value="CEC Bank">CEC Bank</option>
+                    <option value="Credit Europe Bank">Credit Europe Bank</option>
+                    <option value="First Bank">First Bank</option>
+                    <option value="Garanti">Garanti</option>
+                    <option value="ING">ING</option>
+                    <option value="UniCredit Bank">UniCredit Bank</option>
+                    <option value="Raiffeisen Bank">Raiffeisen Bank</option>
+                </select>
+            </div>
+            <div class="search4">
+                <label for="">Status:</label>
+                <select name="b" id="">
+                    <option value="">Select a Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
+            <div class="search5">
+                <button class="searchButton"><i class="fa fa-search"></i>Search</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="withdrawList">
+        {% if Witdrawal_Form %}
+          <table>
+              <tr>
+                  <th>#ID</th>
+                  <th>COMPANY</th>
+                  <th>TRANSACTION DATE</th>
+                  <th>COMPLETION DATE</th>
+                  <th>USER ID</th>
+                  <th>USER NAME</th>
+                  <th>NAME SURNAME</th>
+                  <th>BANK</th>
+                  <th>IBAN</th>
+                  <th>AMOUNT</th>
+                  <th>STATUS</th>
+                  <th>DETAIL</th>
+              </tr>
+
+              <tr>
+                {% for cek in Witdrawal_Form %}
+                <td>{{ cek.id }} </td>
+                <td>{{ None }} </td>
+                <td>{{ None }} </td>
+                <td>{{ None }} </td>
+                <td>{{ None }} </td>
+                <td>{{ None }} </td>
+                <td>{{ cek.name }}</td>
+                <td>{{ cek.bank_name }}</td>
+                <td>{{ cek.iban }}</td>
+                <td>{{ cek.amount }}</td>
+                <td>{{ cek.status }}</td>
+                <td>{{ None }} </td>
+              </tr>
+                {% endfor %}
+          </table>
+        {% elif object_list %}
+          <table>
+            <tr>
+                <th>#ID</th>
+                <th>COMPANY</th>
+                <th>TRANSACTION DATE</th>
+                <th>COMPLETION DATE</th>
+                <th>USER ID</th>
+                <th>USER NAME</th>
+                <th>NAME SURNAME</th>
+                <th>BANK</th>
+                <th>IBAN</th>
+                <th>AMOUNT</th>
+                <th>STATUS</th>
+                <th>DETAIL</th>
+            </tr>
+            <tr>
+          {% for element in object_list %}
+            <td>{{ element.id }} </td>
+            <td>{{ None }} </td>
+            <td>{{ None }} </td>
+            <td>{{ None }} </td>
+            <td>{{ None }} </td>
+            <td>{{ None }} </td>
+            <td>{{ element.name }}</td>
+            <td>{{ element.bank_name }}</td>
+            <td>{{ element.iban }}</td>
+            <td>{{ element.amount }}</td>
+            <td>{{ element.status }}</td>
+            <td>{{ None }} </td>
+            </tr>
+          {% endfor %}
+          </table>
+        {% else %}
+            <p>You dont have any data</p>
+        {% endif %}
+        <div class="withdrawEnd">
+            <p>Total Withdraw:<span class="total"> 0</span></p>
+            <div class="pageNumbers">
+                <ul>
+                    <li><span class="arrow">⬅</span> Previous</li>
+                    <li>1</li>
+                    <li>Next <span class="arrow">⮕</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
