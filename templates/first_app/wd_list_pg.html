@@ -8,8 +8,8 @@
         <div class="divSearch1-1">
             <h3><i class="fa fa-search"></i> Search</h3>
             <p><i class="fa fa-info"></i> Total Withdraw
-              <span class="total">
-                0
+              <span class="total" name = "sum">
+                {{ Sum }}
               </span></p>
         </div>
         <form class="divSearch1-2" action="{% url 'search_wd' %}" method="get">
@@ -129,7 +129,7 @@
             <p>You dont have any data</p>
         {% endif %}
         <div class="withdrawEnd">
-            <p>Total Withdraw:<span class="total"> 0</span></p>
+            <p>Total Withdraw:<span class="total"> {{ Sum }} </span></p>
             <div class="pageNumbers">
                 <ul>
                     <li><span class="arrow">⬅</span> Previous</li>

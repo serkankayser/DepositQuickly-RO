@@ -16,26 +16,41 @@ dp_data_colector = []   # DEPOSIT DATA
 wd_id = []              # SELECTED WD ID
 
 @login_required
-def home_pg(request):
-    return render(request, 'first_app/home.html')
-
-@login_required
 def summary_pg(request):
     return render(request, 'first_app/summary.html')
 
 @login_required
 def wd_list_pg(request):
     withdraw_list = Witdrawal_Form.objects.order_by('-id')
-    withdraws = {'Witdrawal_Form': withdraw_list}
 
-    return render(request, 'first_app/wd_list_pg.html', context=withdraws)
+    # Count withdrawals
+    counter = 0
+    for wd in withdraw_list:
+        counter += 1
+    # FINISH - Count withdrawals
+
+    my_context = {
+        'Witdrawal_Form': withdraw_list,
+        'Sum': counter,
+    }
+    return render(request, 'first_app/wd_list_pg.html', context=my_context)
 
 @login_required
 def dp_list_pg(request):
     deposit_list = Deposit_Form.objects.order_by('-id')
-    deposits = {'Deposit_Form': deposit_list}
 
-    return render(request, 'first_app/dp_list_pg.html', context=deposits)
+    # Count withdrawals
+    counter = 0
+    for dep in deposit_list:
+        counter += 1
+    # FINISH - Count withdrawals
+
+    my_context = {
+        'Deposit_Form': deposit_list,
+        'Sum': counter,
+    }
+
+    return render(request, 'first_app/dp_list_pg.html', context=my_context)
 
 
 # SEARCH IN WITHDRAW LIST
@@ -155,7 +170,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('home_pg'))
+                return HttpResponseRedirect(reverse('summary_pg'))
             else:
                 return HttpResponse("Account not Active!")
         else:

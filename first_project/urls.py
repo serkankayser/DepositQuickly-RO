@@ -18,7 +18,6 @@ from django.urls import path, include
 from first_app import views
 
 urlpatterns = [
-    path('home/', views.home_pg, name='home_pg'),
     path('summary/', views.summary_pg, name='summary_pg'),
     path('wd_list/', views.wd_list_pg, name='wd_list'),
     path('dp_list/', views.dp_list_pg, name='dp_list'),
@@ -29,6 +28,6 @@ urlpatterns = [
     path('', views.user_login, name='login'),
     path('admin/', admin.site.urls),
     path('form/', views.dp_form, name='dp_form'),
-    path('form/', include('first_app.urls')),    
+    path('form/', include('first_app.urls')),
 
 ]

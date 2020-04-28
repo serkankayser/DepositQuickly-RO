@@ -9,7 +9,7 @@
             <h3><i class="fa fa-search"></i> Search</h3>
             <p><i class="fa fa-info"></i> Total Deposit
               <span class="total">
-                0
+                {{ Sum }}
               </span></p>
         </div>
         <form class="divSearch1-2" action="{% url 'search_dp' %}" method="get">
@@ -125,7 +125,7 @@
             <p>You dont have any data</p>
         {% endif %}
         <div class="withdrawEnd">
-            <p>Total Deposit:<span class="total"> 0</span></p>
+            <p>Total Deposit:<span class="total"> {{ Sum }} </span></p>
             <div class="pageNumbers">
                 <ul>
                     <li><span class="arrow">⬅</span> Previous</li>
