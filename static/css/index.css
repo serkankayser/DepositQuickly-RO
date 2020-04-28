@@ -7,12 +7,13 @@
 html, body{
     width: 100%;
     height: 100%;
+    background-color: rgb(238, 229, 241);
 }
 
 /* ---TOP BAR--- */
 .navBarTop{
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #222D32;
     position: fixed;
 }
 
@@ -55,7 +56,7 @@ html, body{
     position: absolute;
     right: 0;
     top: 61px;
-    background-color: #4CAF50;
+    background-color: #222D32;
     display: none;
 }
 
@@ -101,7 +102,7 @@ html, body{
 /* ---LEFT BAR--- */
 .navBarLeft{
     width: 200px;
-    background-color: #4CAF50;
+    background-color: #222D32;
     height: 100%;
     position: fixed;
     margin-top: 60px;
@@ -130,7 +131,7 @@ html, body{
     text-decoration: none;
     width: 100%;
     color: #b8c7ce;
-    border-left: 5px solid #4CAF50;
+    border-left: 5px solid #222D32;
     padding: 20px 15px;
     font-size: 15px;
     list-style: none;
@@ -154,7 +155,6 @@ html, body{
     height: 100%;
     padding-left: 200px;
     padding-top: 61px;
-    background-color: rgb(238, 229, 241);
 }
 
 .content>h2{
@@ -369,4 +369,119 @@ html, body{
     background-color: rgb(207, 175, 175);
     border: 1px solid rgb(161, 123, 123);
     border-radius: 8px;
+}
+
+.depositContent{
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    position: relative;
+}
+
+.pDeposit{
+    display: table;
+    width: 329px;
+    padding: 5.5px;
+    position: absolute;
+    transform: rotate(270deg);
+    text-align: center;
+    background-color: green;
+    color: white;
+    top: 150px;
+    left: -151px;
+}
+
+
+.completedRaport, .inProgressRaport, .pendingRaport{
+    width: 32%;
+    display: inline-block;
+}
+
+.completedRaport, .inProgressRaport{
+    border-right: 1px solid black;
+}
+
+h3{
+    margin: 1rem 0 2rem 0;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.depositRaport table{
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-bottom: 1.5px solid green;
+}
+.depositRaport table:nth-child(2), .depositRaport table:nth-child(3){
+    margin-bottom: 2.5rem;
+}
+
+.depositRaport table:nth-child(4){
+    margin-bottom: 1rem;
+}
+
+tr{
+    text-align: center;
+}
+
+td{
+    padding: 0.5rem 2rem;
+    width: 300px;
+}
+
+span{
+    font-weight: bold;
+}
+
+
+/* WITHDRAW */
+
+.withdrawContent{
+    border-bottom: 1px solid black;
+    position: relative;
+}
+
+.pWitdraw{
+    display: table;
+    width: 329px;
+    padding: 5.5px;
+    position: absolute;
+    transform: rotate(270deg);
+    text-align: center;
+    background-color: red;
+    color: white;
+    top: 148px;
+    left: -151px;
+}
+
+.completedWithdrawRaport, .inProgressWithdrawRaport, .pendingWithdrawRaport{
+    width: 32%;
+    display: inline-block;
+}
+
+.completedWithdrawRaport, .inProgressWithdrawRaport{
+    border-right: 1px solid black;
+}
+
+.withdrawRaport table{
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-bottom: 1.5px solid red;
+}
+.withdrawRaport table:nth-child(2), .withdrawRaport table:nth-child(3){
+    margin-bottom: 2.5rem;
+}
+
+.withdrawRaport table:nth-child(4){
+    margin-bottom: 1rem;
+}
+
+.depositRaport th:first-of-type{
+    background-color: green;
+    padding: 7px;
+
+}
+
+.withdrawRaport th:first-of-type{
+    background-color: red;
+    padding: 7px;
 }

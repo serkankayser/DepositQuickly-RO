@@ -78,7 +78,7 @@
                 {% for dep in Deposit_Form %}
                 <td>{{ dep.id }} </td>
                 <td>{{ None }} </td>
-                <td>{{ None }} </td>
+                <td>{{ dep.date }} </td>
                 <td>{{ None }} </td>
                 <td>{{ None }} </td>
                 <td>{{ dep.username }} </td>
@@ -109,7 +109,7 @@
           {% for element in object_list %}
             <td>{{ element.id }} </td>
             <td>{{ None }} </td>
-            <td>{{ None }} </td>
+            <td>{{ element.date }} </td>
             <td>{{ None }} </td>
             <td>{{ None }} </td>
             <td>{{ element.username }} </td>

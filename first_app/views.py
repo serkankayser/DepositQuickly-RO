@@ -22,7 +22,6 @@ def summary_pg(request):
 @login_required
 def wd_list_pg(request):
     withdraw_list = Witdrawal_Form.objects.order_by('-id')
-
     # Count withdrawals
     counter = 0
     for wd in withdraw_list:
@@ -218,12 +217,11 @@ def sl_value(request):
         wd_filtered = Witdrawal_Form.objects.filter(id=selected_wd_id)
 
         for obj_wd in wd_filtered:
-            wd_id.clear()
             obj.amount = obj_wd.amount
-            obj.status = 'In Progress'
             obj.save()
             obj_wd.status = 'In Progress'
             obj_wd.save()
+            wd_id.clear()
             wd_id.append(obj_wd.id)
 
         return HttpResponseRedirect(reverse('sendMoney'))
@@ -232,6 +230,7 @@ def sl_value(request):
 def send_money(request):
     withdraw_list = Witdrawal_Form.objects.order_by('-id')
     deposit_list = Deposit_Form.objects.order_by('-id')[0]
+
     for selected_wd in withdraw_list:
         if wd_id[0] == selected_wd.id:
             withdraw_list = selected_wd
@@ -239,37 +238,17 @@ def send_money(request):
         'Witdrawal_Form': withdraw_list,
         'Deposit_Form': deposit_list,
     }
+    if request.method == "POST":
+        obj = Deposit_Form.objects.latest('id')
+        wd_filtered = Witdrawal_Form.objects.filter(id=wd_id[0])
+
+        for obj_wd in wd_filtered:
+            obj.amount = obj_wd.amount
+            obj.status = 'Completed'
+            obj.save()
+            obj_wd.status = 'Completed'
+            obj_wd.save()
+            wd_id.clear()
+            wd_id.append(obj_wd.id)
+        return render(request, 'first_app/done.html')
     return render(request, 'first_app/get_bank_info.html', context=my_context)
-
-
-# if request.method == "POST":
-#     Deposit_Form.name = request.POST.get('name_surname')
-#     Deposit_Form.username = request.POST.get('username')
-#     Deposit_Form.bank_name = request.POST.get('bank_name')
-#
-#     return HttpResponseRedirect(reverse('selectValue'))
-#
-# else:
-#     return render(request, 'first_app/dp_form.html',{})
-
-
-#
-# def withdraws(request):
-#     form = NewWitdrawForm()
-#
-#     if request.method == "POST":
-#         form = NewWitdrawForm(request.POST)
-#
-#         if form.is_valid():
-#             form.save(commit=True)
-#             ###### TUM CEKIM VERILERINI AL!! ######
-#             obj = Witdrawal_Form.objects.values()
-#             wd_data_colector = obj
-#             for data in wd_data_colector:
-#                 print(data.get('id'))
-#             ###### BITTI - TUM CEKIM VERILERINI AL!! ######
-#             return redirect('home_pg')
-#         else:
-#             print('ERROR, FORM INVALID')
-#
-#     return render(request, 'first_app/form.html', {'form': form})

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
+
 # Create your models here.
 
 class UserProfileInfo(models.Model):
@@ -13,7 +15,7 @@ class UserProfileInfo(models.Model):
 
 class Witdrawal_Form(models.Model):
 
-    id = models.IntegerField(unique=True, primary_key=True)
+    id = models.AutoField(unique=True, primary_key=True)
     name = models.CharField(max_length=264)
     all_bank_name = (
         ('Banca Transilvania', 'Banca Transilvania'),
@@ -38,12 +40,13 @@ class Witdrawal_Form(models.Model):
         ('Rejected', 'Rejected'),
     )
     status = models.CharField(max_length=15, default='Pending', choices=all_status)
+    date = models.DateTimeField(default=now, editable=False)
 
     def __str__(self):
         return self.name
 
 class Deposit_Form(models.Model):
-    id = models.IntegerField(unique=True, primary_key=True)
+    id = models.AutoField(unique=True, primary_key=True)
     name = models.CharField(max_length=264)
     username = models.CharField(max_length=264)
     all_bank_name = (
@@ -67,7 +70,9 @@ class Deposit_Form(models.Model):
         ('Completed', 'Completed'),
         ('Rejected', 'Rejected'),
     )
-    status = models.CharField(max_length=15, default='Pending', choices=all_status)
+    status = models.CharField(max_length=15, default='In Progress', choices=all_status)
+
+    date = models.DateTimeField(default=now, editable=False)
 
     def __str__(self):
         return self.name
