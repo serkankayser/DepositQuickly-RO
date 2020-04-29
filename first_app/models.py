@@ -40,7 +40,8 @@ class Witdrawal_Form(models.Model):
         ('Rejected', 'Rejected'),
     )
     status = models.CharField(max_length=15, default='Pending', choices=all_status)
-    date = models.DateTimeField(default=now, editable=False)
+    created_date = models.DateTimeField(default=now,editable=False)
+    modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -71,8 +72,8 @@ class Deposit_Form(models.Model):
         ('Rejected', 'Rejected'),
     )
     status = models.CharField(max_length=15, default='In Progress', choices=all_status)
-
-    date = models.DateTimeField(default=now, editable=False)
+    created_date = models.DateTimeField(default=now, editable=False)
+    modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

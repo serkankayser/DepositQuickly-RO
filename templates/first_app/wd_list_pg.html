@@ -63,8 +63,8 @@
               <tr>
                   <th>#ID</th>
                   <th>COMPANY</th>
-                  <th>TRANSACTION DATE</th>
-                  <th>COMPLETION DATE</th>
+                  <th>CREATION DATE</th>
+                  <th>MODIFICATION DATE</th>
                   <th>USER ID</th>
                   <th>USER NAME</th>
                   <th>NAME SURNAME</th>
@@ -79,8 +79,8 @@
                 {% for cek in Witdrawal_Form %}
                 <td>{{ cek.id }} </td>
                 <td>{{ None }} </td>
-                <td>{{ cek.date }} </td>
-                <td>{{ None }} </td>
+                <td>{{ cek.created_date|date:"SHORT_DATE_FORMAT" }} {{ cek.created_date|time:"H:i:s" }} </td>
+                <td>{{ cek.modified_date|date:"SHORT_DATE_FORMAT" }} {{ cek.modified_date|time:"H:i:s" }} </td>
                 <td>{{ None }} </td>
                 <td>{{ None }} </td>
                 <td>{{ cek.name }}</td>
@@ -97,8 +97,8 @@
             <tr>
                 <th>#ID</th>
                 <th>COMPANY</th>
-                <th>TRANSACTION DATE</th>
-                <th>COMPLETION DATE</th>
+                <th>CREATION DATE</th>
+                <th>MODIFICATION DATE</th>
                 <th>USER ID</th>
                 <th>USER NAME</th>
                 <th>NAME SURNAME</th>
@@ -112,8 +112,8 @@
           {% for element in object_list %}
             <td>{{ element.id }} </td>
             <td>{{ None }} </td>
-            <td>{{ element.date }} </td>
-            <td>{{ None }} </td>
+            <td>{{ element.created_date|date:"SHORT_DATE_FORMAT" }} {{ element.created_date|time:"H:i:s" }} </td>
+            <td>{{ element.modified_date|date:"SHORT_DATE_FORMAT" }} {{ element.modified_date|time:"H:i:s" }} </td>
             <td>{{ None }} </td>
             <td>{{ None }} </td>
             <td>{{ element.name }}</td>

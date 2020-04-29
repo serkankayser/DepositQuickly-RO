@@ -10,7 +10,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-
 wd_data_colector = []   # WITHDRAW DATA
 dp_data_colector = []   # DEPOSIT DATA
 wd_id = []              # SELECTED WD ID
