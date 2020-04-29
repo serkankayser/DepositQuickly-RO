@@ -21,6 +21,7 @@ def summary_pg(request):
 @login_required
 def wd_list_pg(request):
     withdraw_list = Witdrawal_Form.objects.order_by('-id')
+
     # Count withdrawals
     counter = 0
     for wd in withdraw_list:
@@ -60,31 +61,38 @@ class SearchResultsView_wd(ListView):
 
         # SEARCH FOR INPUT
         query_name_wd = self.request.GET.get('q')
-        print(query_name_wd)
         object_list_input_wd = Witdrawal_Form.objects.filter(Q(name__icontains=query_name_wd)).order_by('-id')
         val_input_wd = object_list_input_wd.values()
         # SEARCH FOR INPUT - FINISH
 
         # SEARCH FOR BANK
-        query_bank_wd = self.request.GET.get('a')
+        query_bank_wd = self.request.GET.get('q3')
         object_list_bank_wd = Witdrawal_Form.objects.filter(Q(bank_name__icontains=query_bank_wd)).order_by('-id')
         val_bank_wd = object_list_bank_wd.values()
         # SEARCH FOR BANK - FINISH
 
         # SEARCH FOR STATUS
-        query_status_wd = self.request.GET.get('b')
+        query_status_wd = self.request.GET.get('q4')
         object_list_status_wd = Witdrawal_Form.objects.filter(Q(status__icontains=query_status_wd)).order_by('-id')
         val_status_wd = object_list_status_wd.values()
         # SEARCH FOR STATUS - FINISH
 
         # SEARCH FOR DATE
-        # ---CODE HERE
+        query_cr_date1_wd = self.request.GET.get('q1')
+        query_cr_date2_wd = self.request.GET.get('q2')
+        if query_cr_date1_wd and query_cr_date2_wd:
+            object_list_cr_date_wd = Witdrawal_Form.objects.filter(created_date__range=[query_cr_date1_wd, query_cr_date2_wd])
+            val_cr_date_wd = object_list_cr_date_wd.values()
+            for obj in val_input_wd & val_bank_wd & val_status_wd & val_cr_date_wd:
+                if not obj in wd_data_colector:
+                    wd_data_colector.append(obj)
+            return wd_data_colector
         # SEARCH FOR DATE - FINISH
-
         for obj in val_input_wd & val_bank_wd & val_status_wd:
             if not obj in wd_data_colector:
                 wd_data_colector.append(obj)
         return wd_data_colector
+
 # SEARCH IN WITHDRAW LIST --- FINISH
 
 # SEARCH IN DEPOSIT LIST
@@ -115,7 +123,15 @@ class SearchResultsView_dp(ListView):
         # SEARCH FOR STATUS - FINISH
 
         # SEARCH FOR DATE
-        # ---CODE HERE
+        query_cr_date1_dp = self.request.GET.get('s2-1')
+        query_cr_date2_dp = self.request.GET.get('s2-2')
+        if query_cr_date1_dp and query_cr_date2_dp:
+            object_list_cr_date_dp = Deposit_Form.objects.filter(created_date__range=[query_cr_date1_dp, query_cr_date2_dp])
+            val_cr_date_dp = object_list_cr_date_dp.values()
+            for obj in val_input_dp & val_bank_dp & val_status_dp & val_cr_date_dp:
+                if not obj in dp_data_colector:
+                    dp_data_colector.append(obj)
+            return dp_data_colector
         # SEARCH FOR DATE - FINISH
 
         for obj in val_input_dp & val_bank_dp & val_status_dp:
