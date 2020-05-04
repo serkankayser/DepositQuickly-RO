@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from first_app.models import Witdrawal_Form, Deposit_Form
+from first_app.summary import sum_dep, sum_wd
 from first_app.forms import NewDepositForm, UserForm, UserProfileInfoForm
 from django.views.generic import TemplateView, ListView
 import operator
@@ -16,7 +17,24 @@ wd_id = []              # SELECTED WD ID
 
 @login_required
 def summary_pg(request):
-    return render(request, 'first_app/summary.html')
+
+    my_context = {
+    'Dep_comp_sum': sum_dep()['Dep_comp_sum'],
+    'Dep_comp_pieces': sum_dep()['Dep_comp_pieces'],
+    'Dep_inPro_sum': sum_dep()['Dep_inPro_sum'],
+    'Dep_inPro_pieces': sum_dep()['Dep_inPro_pieces'],
+    'Dep_pending_sum': sum_dep()['Dep_pending_sum'],
+    'Dep_pending_pieces': sum_dep()['Dep_pending_pieces'],
+
+    'Wd_comp_sum': sum_wd()['Wd_comp_sum'],
+    'Wd_comp_pieces': sum_wd()['Wd_comp_pieces'],
+    'Wd_inPro_sum': sum_wd()['Wd_inPro_sum'],
+    'Wd_inPro_pieces': sum_wd()['Wd_inPro_pieces'],
+    'Wd_pending_sum': sum_wd()['Wd_pending_sum'],
+    'Wd_pending_pieces': sum_wd()['Wd_pending_pieces'],
+    }
+    
+    return render(request, 'first_app/summary.html', context=my_context)
 
 @login_required
 def wd_list_pg(request):

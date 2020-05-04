@@ -8,28 +8,30 @@ django.setup()
 ## FAKE POP SCRIPT
 
 import random
-from first_app.models import AccessRecord, Webpage, Topic
+from first_app.models import Witdrawal_Form
 from faker import Faker
 
 
 fakegen = Faker()
-topics = [
-    'Search',
-    'Social',
-    'Marketplace',
-    'News',
-    'Games'
+wd_form = [
+    'name',
+    'bank_name',
+    'iban',
+    'amount',
+    'status',
+    'created_date',
+    'modified_date',
 ]
 
-def add_topic():
-    t = Topic.objects.get_or_create(top_name= random.choice(topics))[0]
-    t.save()
-    return t
+def add_wd():
+    wd = Witdrawal_Form.objects.get_or_create(top_name= random.choice(wd_form))[0]
+    wd.save()
+    return wd
 
 def populate(N=5):
 
     for entry in range(N):
-        top = add_topic()
+        top = add_wd()
         fake_url = fakegen.url()
         fake_date = fakegen.date()
         fake_name = fakegen.company()
