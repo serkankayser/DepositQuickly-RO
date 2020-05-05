@@ -176,7 +176,7 @@ html, body{
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
+    padding: 10px 10px;
     border-bottom: 0.5px solid black;
 }
 
@@ -185,6 +185,7 @@ html, body{
     padding: 5px 10px;
     border-radius: 5px;
     cursor: default;
+
 }
 
 .divSearch1-2{
@@ -379,15 +380,15 @@ html, body{
 
 .pDeposit{
     display: table;
-    width: 329px;
+    width: 256px;
     padding: 5.5px;
     position: absolute;
     transform: rotate(270deg);
     text-align: center;
     background-color: green;
     color: white;
-    top: 150px;
-    left: -151px;
+    top: 114px;
+    left: -114px;
 }
 
 
@@ -402,6 +403,12 @@ html, body{
 
 h3{
     margin: 1rem 0 2rem 0;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.search_bar {
+    margin: 0;
     text-align: center;
     text-decoration: underline;
 }
@@ -442,15 +449,15 @@ span{
 
 .pWitdraw{
     display: table;
-    width: 329px;
+    width: 256px;
     padding: 5.5px;
     position: absolute;
     transform: rotate(270deg);
     text-align: center;
     background-color: red;
     color: white;
-    top: 148px;
-    left: -151px;
+    top: 114px;
+    left: -114px;
 }
 
 .completedWithdrawRaport, .inProgressWithdrawRaport, .pendingWithdrawRaport{

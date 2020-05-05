@@ -95,7 +95,6 @@ def sum_wd():
     wd_pending_sum_month = 0
     wd_pending_pieces_month = 0
     ### DAILY ###
-
     for summary_wd in withdraw_list:
         td = summary_wd['modified_date'].strftime("%d-%m-%Y")
         if summary_wd['status'] == 'Completed' and td == today:
@@ -109,11 +108,9 @@ def sum_wd():
         if summary_wd['status'] == 'Pending' and td == today:
             wd_pending_sum_td += summary_wd['amount']
             wd_pending_pieces_td += 1
-
     ### DAILY - FINISH ###
 
     ### MONTHLY ###
-
     for summary_wd_month in withdraw_list:
         mt = summary_wd_month['modified_date'].strftime("%m")
         if summary_wd_month['status'] == 'Completed' and mt == month:
@@ -127,7 +124,6 @@ def sum_wd():
         if summary_wd_month['status'] == 'Pending' and mt == month:
             wd_pending_sum_month += summary_wd_month['amount']
             wd_pending_pieces_month += 1
-
     ### MONTHLY - FINISH ###
 
     my_context_wd = {

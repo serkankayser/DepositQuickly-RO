@@ -6,10 +6,17 @@
     <h2>DEPOSIT LIST</h2>
     <div class="divSearch">
         <div class="divSearch1-1">
-            <h3><i class="fa fa-search"></i> Search</h3>
+            <h3 class="search_bar"><i class="fa fa-search"></i> Search</h3>
             <p><i class="fa fa-info"></i> Total Deposit
               <span class="total">
                 {{ Sum }}
+                {% if object_list %}
+                  {% for element in object_list %}
+                    {% if forloop.last %}
+                        {{ element }}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
               </span></p>
         </div>
         <form class="divSearch1-2" action="{% url 'search_dp' %}" method="get">
@@ -107,6 +114,9 @@
             </tr>
             <tr>
           {% for element in object_list %}
+          {% if forloop.last %}
+              {{ break }}
+          {% else %}
             <td>{{ element.id }} </td>
             <td>{{ None }} </td>
             <td>{{ element.created_date|date:"SHORT_DATE_FORMAT" }} {{ element.created_date|time:"H:i:s" }} </td>
@@ -118,6 +128,7 @@
             <td>{{ element.amount }}</td>
             <td>{{ element.status }}</td>
             <td>{{ None }} </td>
+            {% endif %}
             </tr>
           {% endfor %}
           </table>
@@ -125,7 +136,17 @@
             <p>You dont have any data</p>
         {% endif %}
         <div class="withdrawEnd">
-            <p>Total Deposit:<span class="total"> {{ Sum }} </span></p>
+            <p>Total Deposit:
+              <span class="total">
+                {{ Sum }}
+                {% if object_list %}
+                  {% for element in object_list %}
+                    {% if forloop.last %}
+                        {{ element }}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+               </span></p>
             <div class="pageNumbers">
                 <ul>
                     <li><span class="arrow">⬅</span> Previous</li>

@@ -88,9 +88,10 @@ def dp_list_pg(request):
 class SearchResultsView_wd(ListView):
     model = Witdrawal_Form
     template_name = 'first_app/wd_list_pg.html'
+
     def get_queryset(self):
         wd_data_colector.clear()
-
+        counter = 0
         # SEARCH FOR INPUT
         query_name_wd = self.request.GET.get('q')
         object_list_input_wd = Witdrawal_Form.objects.filter(Q(name__icontains=query_name_wd)).order_by('-id')
@@ -120,13 +121,18 @@ class SearchResultsView_wd(ListView):
             for obj in val_input_wd & val_bank_wd & val_status_wd & val_cr_date_wd:
                 if not obj in wd_data_colector:
                     wd_data_colector.append(obj)
+                    counter += 1
+            wd_data_colector.append(counter)
             return wd_data_colector
         # SEARCH FOR DATE - FINISH
 
         for obj in val_input_wd & val_bank_wd & val_status_wd:
             if not obj in wd_data_colector:
                 wd_data_colector.append(obj)
+                counter += 1
+        wd_data_colector.append(counter)
         return wd_data_colector
+
 
 # SEARCH IN WITHDRAW LIST --- FINISH
 
@@ -136,7 +142,7 @@ class SearchResultsView_dp(ListView):
     template_name = 'first_app/dp_list_pg.html'
     def get_queryset(self):
         dp_data_colector.clear()
-
+        counter = 0
         # SEARCH FOR INPUT
         query_name_dp = self.request.GET.get('s1')
         object_list_input_dp = Deposit_Form.objects.filter(Q(name__icontains=query_name_dp)).order_by('-id')
@@ -166,12 +172,16 @@ class SearchResultsView_dp(ListView):
             for obj in val_input_dp & val_bank_dp & val_status_dp & val_cr_date_dp:
                 if not obj in dp_data_colector:
                     dp_data_colector.append(obj)
+                    counter += 1
+            dp_data_colector.append(counter)
             return dp_data_colector
         # SEARCH FOR DATE - FINISH
 
         for obj in val_input_dp & val_bank_dp & val_status_dp:
             if not obj in dp_data_colector:
                 dp_data_colector.append(obj)
+                counter += 1
+        dp_data_colector.append(counter)
         return dp_data_colector
 # SEARCH IN DEPOSIT LIST --- FINISH
 
