@@ -19,21 +19,35 @@ wd_id = []              # SELECTED WD ID
 def summary_pg(request):
 
     my_context = {
-    'Dep_comp_sum': sum_dep()['Dep_comp_sum'],
-    'Dep_comp_pieces': sum_dep()['Dep_comp_pieces'],
-    'Dep_inPro_sum': sum_dep()['Dep_inPro_sum'],
-    'Dep_inPro_pieces': sum_dep()['Dep_inPro_pieces'],
-    'Dep_pending_sum': sum_dep()['Dep_pending_sum'],
-    'Dep_pending_pieces': sum_dep()['Dep_pending_pieces'],
+    'Dep_comp_sum_td': sum_dep()['Dep_comp_sum_td'],
+    'Dep_comp_pieces_td': sum_dep()['Dep_comp_pieces_td'],
+    'Dep_inPro_sum_td': sum_dep()['Dep_inPro_sum_td'],
+    'Dep_inPro_pieces_td': sum_dep()['Dep_inPro_pieces_td'],
+    'Dep_pending_sum_td': sum_dep()['Dep_pending_sum_td'],
+    'Dep_pending_pieces_td': sum_dep()['Dep_pending_pieces_td'],
 
-    'Wd_comp_sum': sum_wd()['Wd_comp_sum'],
-    'Wd_comp_pieces': sum_wd()['Wd_comp_pieces'],
-    'Wd_inPro_sum': sum_wd()['Wd_inPro_sum'],
-    'Wd_inPro_pieces': sum_wd()['Wd_inPro_pieces'],
-    'Wd_pending_sum': sum_wd()['Wd_pending_sum'],
-    'Wd_pending_pieces': sum_wd()['Wd_pending_pieces'],
+    'Dep_comp_sum_month': sum_dep()['Dep_comp_sum_month'],
+    'Dep_comp_pieces_month': sum_dep()['Dep_comp_pieces_month'],
+    'Dep_inPro_sum_month': sum_dep()['Dep_inPro_sum_month'],
+    'Dep_inPro_pieces_month': sum_dep()['Dep_inPro_pieces_month'],
+    'Dep_pending_sum_month': sum_dep()['Dep_pending_sum_month'],
+    'Dep_pending_pieces_month': sum_dep()['Dep_pending_pieces_month'],
+
+    'Wd_comp_sum_td': sum_wd()['Wd_comp_sum_td'],
+    'Wd_comp_pieces_td': sum_wd()['Wd_comp_pieces_td'],
+    'Wd_inPro_sum_td': sum_wd()['Wd_inPro_sum_td'],
+    'Wd_inPro_pieces_td': sum_wd()['Wd_inPro_pieces_td'],
+    'Wd_pending_sum_td': sum_wd()['Wd_pending_sum_td'],
+    'Wd_pending_pieces_td': sum_wd()['Wd_pending_pieces_td'],
+
+    'Wd_comp_sum_month': sum_wd()['Wd_comp_sum_month'],
+    'Wd_comp_pieces_month': sum_wd()['Wd_comp_pieces_month'],
+    'Wd_inPro_sum_month': sum_wd()['Wd_inPro_sum_month'],
+    'Wd_inPro_pieces_month': sum_wd()['Wd_inPro_pieces_month'],
+    'Wd_pending_sum_month': sum_wd()['Wd_pending_sum_month'],
+    'Wd_pending_pieces_month': sum_wd()['Wd_pending_pieces_month'],
     }
-    
+
     return render(request, 'first_app/summary.html', context=my_context)
 
 @login_required
@@ -98,14 +112,17 @@ class SearchResultsView_wd(ListView):
         # SEARCH FOR DATE
         query_cr_date1_wd = self.request.GET.get('q1')
         query_cr_date2_wd = self.request.GET.get('q2')
+
         if query_cr_date1_wd and query_cr_date2_wd:
             object_list_cr_date_wd = Witdrawal_Form.objects.filter(created_date__range=[query_cr_date1_wd, query_cr_date2_wd])
             val_cr_date_wd = object_list_cr_date_wd.values()
+
             for obj in val_input_wd & val_bank_wd & val_status_wd & val_cr_date_wd:
                 if not obj in wd_data_colector:
                     wd_data_colector.append(obj)
             return wd_data_colector
         # SEARCH FOR DATE - FINISH
+
         for obj in val_input_wd & val_bank_wd & val_status_wd:
             if not obj in wd_data_colector:
                 wd_data_colector.append(obj)
