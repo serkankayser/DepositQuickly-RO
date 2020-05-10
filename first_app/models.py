@@ -42,6 +42,12 @@ class Witdrawal_Form(models.Model):
     status = models.CharField(max_length=15, default='Pending', choices=all_status)
     created_date = models.DateTimeField(default=now,editable=False)
     modified_date = models.DateTimeField(auto_now=True)
+    company_names = (
+        ('xbet', 'xbet'),
+        ('ybet', 'ybet'),
+        ('zbet', 'zbet'),
+    )
+    company = models.CharField(max_length=50 ,choices=company_names)
 
     def __str__(self):
         return self.name
@@ -74,6 +80,12 @@ class Deposit_Form(models.Model):
     status = models.CharField(max_length=15, default='In Progress', choices=all_status)
     created_date = models.DateTimeField(default=now, editable=False)
     modified_date = models.DateTimeField(auto_now=True)
+    company_names = (
+        ('xbet', 'xbet'),
+        ('ybet', 'ybet'),
+        ('zbet', 'zbet'),
+    )
+    company = models.CharField(max_length=50 ,choices=company_names)
 
     def __str__(self):
         return self.name

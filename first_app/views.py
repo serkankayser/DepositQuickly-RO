@@ -14,7 +14,6 @@ from django.contrib.auth.decorators import login_required
 wd_data_colector = []   # WITHDRAW DATA
 dp_data_colector = []   # DEPOSIT DATA
 wd_id = []              # SELECTED WD ID
-
 @login_required
 def summary_pg(request):
 
@@ -64,6 +63,7 @@ def wd_list_pg(request):
         'Witdrawal_Form': withdraw_list,
         'Sum': counter,
     }
+
     return render(request, 'first_app/wd_list_pg.html', context=my_context)
 
 @login_required
