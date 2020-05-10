@@ -27,7 +27,10 @@ SECRET_KEY = '%!ko5z&oir3vj5yyzqvt1-p=3#b!#+=b(!1)e&1h3(eiovg0z('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['144.91.92.216']
+ALLOWED_HOSTS = [
+        '144.91.92.216',
+        'www.fastwithdraw.com',
+]
 
 
 # Application definition
@@ -130,7 +133,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/first_project/static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
