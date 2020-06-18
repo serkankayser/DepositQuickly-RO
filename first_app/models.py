@@ -14,10 +14,10 @@ class UserProfileInfo(models.Model):
 
 
 class Witdrawal_Form(models.Model):
-
     id = models.AutoField(unique=True, primary_key=True)
     name = models.CharField(max_length=264)
     all_bank_name = (
+        ('PayPal', 'Paypal'),
         ('Banca Transilvania', 'Banca Transilvania'),
         ('Bancpost', 'Bancpost'),
         ('BCR', 'BCR'),
@@ -31,7 +31,8 @@ class Witdrawal_Form(models.Model):
         ('Raiffeisen Bank', 'Raiffeisen Bank'),
     )
     bank_name = models.CharField(max_length=50, default='' ,choices=all_bank_name)
-    iban = models.CharField(max_length=26)
+    mail = models.EmailField(max_length=50, default='')
+    iban = models.CharField(max_length=26, blank=True)
     amount = models.IntegerField()
     all_status = (
         ('Pending', 'Pending'),
@@ -57,6 +58,7 @@ class Deposit_Form(models.Model):
     name = models.CharField(max_length=264)
     username = models.CharField(max_length=264)
     all_bank_name = (
+        ('PayPal', 'PayPal'),
         ('Banca Transilvania', 'Banca Transilvania'),
         ('Bancpost', 'Bancpost'),
         ('BCR', 'BCR'),
@@ -89,3 +91,4 @@ class Deposit_Form(models.Model):
 
     def __str__(self):
         return self.name
+

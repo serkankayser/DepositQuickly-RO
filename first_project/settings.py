@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'first_app',
+    'paypal.standard.ipn',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,8 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
 LOGIN_URL = '/first_app/user_login'
+
+
+#django-paypal SETTINGS
+PAYPAL_RECEIVER_EMAIL = 'serkankayser@windowslive.com'
+PAYPAL_TEST = True

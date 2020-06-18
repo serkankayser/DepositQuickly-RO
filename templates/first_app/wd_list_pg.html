@@ -35,6 +35,7 @@
                 <label for="">Bank:</label>
                 <select name="q3" id="">
                     <option value="">Select a Bank</option>
+                    <option value="PayPal">PayPal</option>
                     <option value="Banca Transilvania">Banca Transilvania</option>
                     <option value="Bancpost">Bancpost</option>
                     <option value="BCR">BCR</option>
@@ -72,8 +73,8 @@
                   <th>COMPANY</th>
                   <th>CREATION DATE</th>
                   <th>MODIFICATION DATE</th>
-                  <th>USER ID</th>
-                  <th>USER NAME</th>
+                  <th>E-MAIL</th>
+                  <th>USERNAME</th>
                   <th>NAME SURNAME</th>
                   <th>BANK</th>
                   <th>IBAN</th>
@@ -88,7 +89,7 @@
                 <td>{{ None }} </td>
                 <td>{{ cek.created_date|date:"SHORT_DATE_FORMAT" }} {{ cek.created_date|time:"H:i:s" }} </td>
                 <td>{{ cek.modified_date|date:"SHORT_DATE_FORMAT" }} {{ cek.modified_date|time:"H:i:s" }} </td>
-                <td>{{ None }} </td>
+                <td>{{ cek.mail }} </td>
                 <td>{{ None }} </td>
                 <td>{{ cek.name }}</td>
                 <td>{{ cek.bank_name }}</td>
@@ -106,8 +107,8 @@
                 <th>COMPANY</th>
                 <th>CREATION DATE</th>
                 <th>MODIFICATION DATE</th>
-                <th>USER ID</th>
-                <th>USER NAME</th>
+                <th>E-MAIL</th>
+                <th>USERNAME</th>
                 <th>NAME SURNAME</th>
                 <th>BANK</th>
                 <th>IBAN</th>
@@ -124,7 +125,7 @@
               <td>{{ None }} </td>
               <td>{{ element.created_date|date:"SHORT_DATE_FORMAT" }} {{ element.created_date|time:"H:i:s" }} </td>
               <td>{{ element.modified_date|date:"SHORT_DATE_FORMAT" }} {{ element.modified_date|time:"H:i:s" }} </td>
-              <td>{{ None }} </td>
+              <td>{{ element.mail }} </td>
               <td>{{ None }} </td>
               <td>{{ element.name }}</td>
               <td>{{ element.bank_name }}</td>

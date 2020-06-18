@@ -10,6 +10,10 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+#PAYPAL
+from django.conf import settings
+from paypal.standard.forms import PayPalPaymentsForm
+from django.views.decorators.csrf import csrf_exempt
 
 wd_data_colector = []   # WITHDRAW DATA
 dp_data_colector = []   # DEPOSIT DATA
@@ -52,7 +56,6 @@ def summary_pg(request):
 @login_required
 def wd_list_pg(request):
     withdraw_list = Witdrawal_Form.objects.order_by('-id')
-
     # Count withdrawals
     counter = 0
     for wd in withdraw_list:
@@ -270,7 +273,6 @@ def sl_value(request):
         'Deposit_Form': deposit_list,
     }
 
-
     if request.method == "POST":
         obj = Deposit_Form.objects.latest('id')
         selected_wd_id = request.POST.get('btn_cek')
@@ -283,9 +285,21 @@ def sl_value(request):
             obj_wd.save()
             wd_id.clear()
             wd_id.append(obj_wd.id)
-
+        if obj.bank_name == 'PayPal':
+            print('PAYPAL')
+            # RETURN PAYPAL HTML PAGE
+            return HttpResponseRedirect(reverse('paypal'))
         return HttpResponseRedirect(reverse('sendMoney'))
     return render(request, 'first_app/value.html', context=my_context)
+
+
+@csrf_exempt
+def payment_done(request):
+    return render(request, 'first_app/paydone.html')
+
+@csrf_exempt
+def payment_canceled(request):
+    return render(request, 'first_app/canceled.html')
 
 def send_money(request):
     withdraw_list = Witdrawal_Form.objects.order_by('-id')
@@ -298,6 +312,7 @@ def send_money(request):
         'Witdrawal_Form': withdraw_list,
         'Deposit_Form': deposit_list,
     }
+
     if request.method == "POST":
         obj = Deposit_Form.objects.latest('id')
         wd_filtered = Witdrawal_Form.objects.filter(id=wd_id[0])
@@ -310,5 +325,39 @@ def send_money(request):
             obj_wd.save()
             wd_id.clear()
             wd_id.append(obj_wd.id)
+
         return render(request, 'first_app/done.html')
     return render(request, 'first_app/get_bank_info.html', context=my_context)
+
+@csrf_exempt
+def paypal_method(request):
+    currency = 4.84
+    withdraw_list = Witdrawal_Form.objects.order_by('-id')
+    deposit_list = Deposit_Form.objects.order_by('-id')[0]
+    
+    host = request.get_host()
+    
+    obj = Deposit_Form.objects.latest('id')
+    wd_filtered = Witdrawal_Form.objects.filter(id=wd_id[0])
+    for obj_wd in wd_filtered:
+        PAYPAL_RECEIVER_EMAIL = obj_wd.mail
+    
+    paypal_dict = {
+        'business': PAYPAL_RECEIVER_EMAIL,
+        'amount': obj.amount/currency,
+        'item_name': 'Mail: {}'.format(PAYPAL_RECEIVER_EMAIL),
+        'invoice': str(obj.id),
+        'currency_code': 'EUR',
+        'notify_url': 'http://{}{}'.format(host, reverse('paypal-ipn')),
+        'return_url': 'http://{}{}'.format(host, reverse('first_app:paydone')),
+        'cancel_return': 'http://{}{}'.format(host, reverse('first_app:canceled')),
+    }
+        
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    my_paypal = {
+        'Witdrawal_Form': withdraw_list,
+        'Deposit_Form': deposit_list,
+        'form': form,
+    }
+    
+    return render(request, 'first_app/paypal.html', context=my_paypal)

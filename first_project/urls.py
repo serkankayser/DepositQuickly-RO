@@ -29,5 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('form/', views.dp_form, name='dp_form'),
     path('form/', include('first_app.urls')),
-
+    path(r'^paypal/', include('paypal.standard.ipn.urls')),
+    path(r'^payment/', include(('first_app.urls', 'first_app'), namespace='first_app')),
+ 
 ]

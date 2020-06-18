@@ -35,6 +35,7 @@
                 <label for="">Bank:</label>
                 <select name="s3" id="">
                     <option value="">Select a Bank</option>
+                    <option value="PayPal">PayPal</option>
                     <option value="Banca Transilvania">Banca Transilvania</option>
                     <option value="Bancpost">Bancpost</option>
                     <option value="BCR">BCR</option>
@@ -72,7 +73,6 @@
                   <th>COMPANY</th>
                   <th>CREATION DATE</th>
                   <th>MODIFICATION DATE</th>
-                  <th>USER ID</th>
                   <th>USERNAME</th>
                   <th>NAME SURNAME</th>
                   <th>BANK</th>
@@ -87,7 +87,6 @@
                 <td>{{ None }} </td>
                 <td>{{ dep.created_date|date:"SHORT_DATE_FORMAT" }} {{ dep.created_date|time:"H:i:s" }} </td>
                 <td>{{ dep.modified_date|date:"SHORT_DATE_FORMAT" }} {{ dep.modified_date|time:"H:i:s" }} </td>
-                <td>{{ None }} </td>
                 <td>{{ dep.username }} </td>
                 <td>{{ dep.name }}</td>
                 <td>{{ dep.bank_name }}</td>
@@ -104,7 +103,6 @@
                 <th>COMPANY</th>
                 <th>CREATION DATE</th>
                 <th>MODIFICATION DATE</th>
-                <th>USER ID</th>
                 <th>USERNAME</th>
                 <th>NAME SURNAME</th>
                 <th>BANK</th>
@@ -121,7 +119,6 @@
             <td>{{ None }} </td>
             <td>{{ element.created_date|date:"SHORT_DATE_FORMAT" }} {{ element.created_date|time:"H:i:s" }} </td>
             <td>{{ element.modified_date|date:"SHORT_DATE_FORMAT" }} {{ element.modified_date|time:"H:i:s" }} </td>
-            <td>{{ None }} </td>
             <td>{{ element.username }} </td>
             <td>{{ element.name }}</td>
             <td>{{ element.bank_name }}</td>
