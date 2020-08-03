@@ -55,7 +55,7 @@ def summary_pg(request):
 
 @login_required
 def wd_list_pg(request):
-    withdraw_list = Witdrawal_Form.objects.order_by('-id')
+    withdraw_list = Witdrawal_Form.objects.order_by('-modified_date')
     # Count withdrawals
     counter = 0
     for wd in withdraw_list:
@@ -286,8 +286,6 @@ def sl_value(request):
             wd_id.clear()
             wd_id.append(obj_wd.id)
         if obj.bank_name == 'PayPal':
-            print('PAYPAL')
-            # RETURN PAYPAL HTML PAGE
             return HttpResponseRedirect(reverse('paypal'))
         return HttpResponseRedirect(reverse('sendMoney'))
     return render(request, 'first_app/value.html', context=my_context)
@@ -336,7 +334,6 @@ def paypal_method(request):
     deposit_list = Deposit_Form.objects.order_by('-id')[0]
     
     host = request.get_host()
-    
     obj = Deposit_Form.objects.latest('id')
     wd_filtered = Witdrawal_Form.objects.filter(id=wd_id[0])
     for obj_wd in wd_filtered:

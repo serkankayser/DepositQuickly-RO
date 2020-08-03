@@ -31,7 +31,7 @@ class Witdrawal_Form(models.Model):
         ('Raiffeisen Bank', 'Raiffeisen Bank'),
     )
     bank_name = models.CharField(max_length=50, default='' ,choices=all_bank_name)
-    mail = models.EmailField(max_length=50, default='')
+    mail = models.EmailField(max_length=50, blank=True)
     iban = models.CharField(max_length=26, blank=True)
     amount = models.IntegerField()
     all_status = (
